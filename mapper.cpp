@@ -1,12 +1,31 @@
 #include <iostream>
+#include <sstream>
+#include "typedbytes.h"
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
-    // TODO: read text key value pairs input and output binary key value pairs
+    TypedBytesOutFile out(stdout);
     
-    std::cout << "I'm a mapper!\n";
+    string buffer;
+    istringstream sin;
+    
+    int i;
+    double j;
+    
+    while (!cin.eof())
+    {
+        getline(cin, buffer);
+        
+        sin.str(buffer);
+        sin.clear();
+        
+        sin >> i >> j;
+        
+        out.write_int(i);
+        out.write_double(j);
+    }
     
     return 0;
 }
