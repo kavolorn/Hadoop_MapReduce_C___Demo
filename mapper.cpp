@@ -18,13 +18,23 @@ int main(int argc, char ** argv)
     {
         getline(cin, buffer);
         
+        if (buffer.length() == 0) {
+            break;
+        }
+        
         sin.str(buffer);
         sin.clear();
-        
-        sin >> i >> j;
-        
+
+        sin >> i;
         out.write_int(i);
-        out.write_double(j);
+
+        out.write_vector_start(3);
+
+        for (i = 0; i < 3; i++)
+        {
+            sin >> j;
+            out.write_double(j);
+        }
     }
     
     return 0;
