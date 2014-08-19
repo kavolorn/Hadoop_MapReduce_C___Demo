@@ -11,7 +11,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.typedbytes.TypedBytesWritable;
 
-
+// (Taken to our project from 
+// http://stackoverflow.com/questions/5377118/how-to-convert-txt-file-to-hadoops-sequence-file-format )
 //White, Tom (2012-05-10). Hadoop: The Definitive Guide (Kindle Locations 5375-5384). OReilly Media - A. Kindle Edition. 
 
 public class SequenceFileWriteDemo { 
@@ -27,8 +28,6 @@ public class SequenceFileWriteDemo {
     {3.1, 3.2, 3.3},
     {3.2, 3.3, 3.4},
     {3.3, 3.4, 3.5}};
-
-  private static final String[] DATA = { "One, two, buckle my shoe", "Three, four, shut the door", "Five, six, pick up sticks", "Seven, eight, lay them straight", "Nine, ten, a big fat hen" };
 
   public static void main( String[] args) throws IOException { 
     String uri = args[0];
