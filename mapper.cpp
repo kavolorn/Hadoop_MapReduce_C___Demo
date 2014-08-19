@@ -6,34 +6,38 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
+    TypedBytesInFile in(stdin);
     TypedBytesOutFile out(stdout);
-    
-    string buffer;
-    istringstream sin;
+    TypedBytesType keytype;
     
     int i;
     double j;
     
-    while (!cin.eof())
+    while (!feof(in.stream))
     {
-        getline(cin, buffer);
-        
-        if (buffer.length() == 0) {
-            break;
-        }
-        
-        sin.str(buffer);
-        sin.clear();
-
-        sin >> i;
-        out.write_int(i);
-
-        out.write_vector_start(3);
-
-        for (i = 0; i < 3; i++)
+        keytype = in.next_type();
+        if (keytype == TypedBytesInteger) 
         {
-            sin >> j;
-            out.write_double(j);
+            i = in.read_int();
+            out.write_int(i);
+
+            keytype = in.next_type();
+            if (keytype == TypedBytesVector)
+            {
+                int vector_length = in.read_typedbytes_sequence_length();
+                out.write_vector_start(vector_length);
+                
+                for (int k = 0; k < vector_length; k++)
+                {
+                    in.next_type();
+                    j = in.read_double();
+                    out.write_double(j);
+                }
+            }
+        }
+        else
+        {
+            return 0;
         }
     }
     
