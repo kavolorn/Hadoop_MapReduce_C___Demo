@@ -16,7 +16,3 @@ bin/reducer:
 
 clean:
 	rm -rf bin output
-
-run: compile
-	cat input | bin/mapper | bin/reducer >> output
-	cat output
